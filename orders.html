@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Grab Merchant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .orders-header {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .orders-header h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            margin-left: 16px;
+        }
+
+        .status-selector {
+            margin-left: auto;
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-selector .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00b14f;
+            border-radius: 50%;
+        }
+
+        .tab-navigation {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 64px;
+            z-index: 99;
+        }
+
+        .tab-item {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            color: #757575;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-item.active {
+            color: #00b14f;
+            border-bottom-color: #00b14f;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 32px 16px;
+            color: #757575;
+        }
+
+        .suggestions-container {
+            padding: 16px;
+        }
+
+        .suggestions-title {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .suggestion-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .suggestion-icon {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .suggestion-content {
+            flex: 1;
+        }
+
+        .suggestion-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .suggestion-subtitle {
+            color: #757575;
+            font-size: 0.9rem;
+        }
+
+        .suggestion-card .material-icons {
+            color: #757575;
+        }
+
+        .metrics-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .new-feedback {
+            color: #f44336;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Orders Header -->
+        <header class="orders-header">
+            <a href="index.html">
+                <span class="material-icons">arrow_back</span>
+            </a>
+            <h1>Orders</h1>
+            <div class="status-selector">
+                <span class="status-dot"></span>
+                Normal
+                <span class="material-icons">expand_more</span>
+            </div>
+            <button class="icon-button">
+                <span class="material-icons">more_vert</span>
+            </button>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <a href="#" class="tab-item active">Preparing</a>
+            <a href="#" class="tab-item">Ready</a>
+            <a href="#" class="tab-item">Upcoming</a>
+            <a href="#" class="tab-item">History</a>
+        </nav>
+
+        <!-- Empty State -->
+        <div class="empty-state">
+            <p>No New Orders for Now</p>
+        </div>
+
+        <!-- Suggestions While Waiting -->
+        <div class="suggestions-container">
+            <h2 class="suggestions-title">While waiting for orders...</h2>
+            
+            <a href="https://merchant.grab.com/id-id/guides/all/cara-memenuhi-orderan-yang-masuk" style="text-decoration: none; color: inherit; display: block;">
+                <div class="suggestion-card">
+                    <div class="suggestion-icon">
+                        <span class="material-icons">school</span>
+                    </div>
+                    <div class="suggestion-content">
+                        <div class="suggestion-title">Learn how to manage orders</div>
+                        <div class="suggestion-subtitle">To bring you up to speed</div>
+                    </div>
+                    <span class="material-icons">chevron_right</span>
+                </div>
+            </a>
+
+            <div class="suggestion-card">
+                <div class="suggestion-icon">
+                    <span class="material-icons">touch_app</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="suggestion-title">Review item availability</div>
+                    <div class="suggestion-subtitle">To avoid cancellation</div>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+
+            <div class="suggestion-card">
+                <div class="suggestion-icon">
+                    <span class="material-icons">schedule</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="suggestion-title">Consider using Busy mode</div>
+                    <div class="suggestion-subtitle">To manage delivery expectations</div>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+
+            <div class="suggestion-card">
+                <div class="suggestion-icon">
+                    <span class="material-icons">star</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="suggestion-title">Read customer feedback</div>
+                    <div class="suggestion-subtitle new-feedback">2 new feedback</div>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+        </div>
+
+        <!-- Operational Metrics -->
+        <div class="metrics-card">
+            <div class="metrics-title">Track your operational metrics</div>
+            <span class="material-icons">chevron_right</span>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons">home</span>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <span class="material-icons">restaurant</span>
+                <span>Orders</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">menu_book</span>
+                <span>Menu</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">account_balance_wallet</span>
+                <span>Finance</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">apps</span>
+                <span>More</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Add click handlers for tabs
+        document.querySelectorAll('.tab-item').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 
