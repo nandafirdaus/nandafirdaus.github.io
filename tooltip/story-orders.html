@@ -377,6 +377,7 @@
             const progressBars = document.querySelectorAll('.progress-bar-fill');
             progressBars.forEach((bar, index) => {
                 if (index < currentStory) {
+                    bar.style.transition = 'none';
                     bar.style.width = '100%';
                 } else if (index === currentStory) {
                     bar.style.width = '0%';
@@ -384,12 +385,20 @@
                     bar.style.transition = `width ${STORY_DURATION}ms linear`;
                     setTimeout(() => bar.style.width = '100%', 50);
                 } else {
+                    bar.style.transition = 'none';
                     bar.style.width = '0%';
                 }
             });
         }
 
-        function showStory(index) {
+        function showStory(index, isFirstStory = false) {
+            // Complete the current story's progress bar immediately if not the first story
+            if (!isFirstStory && currentStory >= 0 && currentStory < stories.length) {
+                const currentProgressBar = document.querySelectorAll('.progress-bar-fill')[currentStory];
+                currentProgressBar.style.transition = 'width 0.1s linear';
+                currentProgressBar.style.width = '100%';
+            }
+            
             clearTimeout(storyTimeout);
             if (index < 0) {
                 index = stories.length - 1;
@@ -400,7 +409,11 @@
             currentStory = index;
             const storyImage = document.querySelector('.story-image');
             storyImage.src = stories[currentStory];
-            updateStoryProgress();
+            
+            // Short delay to ensure the previous progress bar animation completes
+            setTimeout(() => {
+                updateStoryProgress();
+            }, isFirstStory ? 0 : 100);
             
             // Auto advance to next story
             storyTimeout = setTimeout(() => {
@@ -412,7 +425,7 @@
             document.querySelector('.story-viewer').classList.add('active');
             currentStory = 0;
             initStoryProgress();
-            showStory(currentStory);
+            showStory(currentStory, true);
         }
 
         function closeStory() {
