@@ -6,8 +6,41 @@
     <title>Success Hub - Grab Merchant</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Floating Home Button */
+        .floating-home {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: #00b14f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            transition: transform 0.2s;
+            z-index: 98;
+        }
+
+        .floating-home:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-home:active {
+            transform: scale(0.95);
+        }
+    </style>
 </head>
 <body>
+    <!-- Floating Home Button -->
+    <a href="../index.html" class="floating-home">
+        <span class="material-icons">home</span>
+    </a>
+
     <div class="app-container">
         <!-- Header -->
         <header class="header">
