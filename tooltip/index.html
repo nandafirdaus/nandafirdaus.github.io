@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Grab Merchant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Location Header -->
+        <header class="location-header">
+            <div class="location-info">
+                <span class="material-icons">location_on</span>
+                <span class="store-name">FOODQA-BJ_Nami's Sea Resto</span>
+            </div>
+            <a href="inbox.html" class="notification-button">
+                <span class="material-icons">notifications</span>
+            </a>
+        </header>
+
+        <!-- Sales Performance Section -->
+        <section class="sales-section">
+            <h2>Sales Performance</h2>
+            <div class="sales-cards">
+                <div class="sales-card primary">
+                    <div class="sales-status">
+                        <button class="status-button">
+                            <span class="status-dot"></span>
+                            Normal
+                            <span class="material-icons">expand_more</span>
+                        </button>
+                    </div>
+                    <div class="sales-number">0</div>
+                    <div class="sales-label">Preparing</div>
+                </div>
+                <div class="sales-card secondary">
+                    <div class="sales-icon">
+                        <span class="material-icons">trending_up</span>
+                    </div>
+                    <div class="sales-info">
+                        <div class="sales-label">Sales</div>
+                        <div class="sales-amount">
+                            <span class="currency">Rp</span>
+                            <span class="amount">0,00</span>
+                        </div>
+                        <div class="sales-orders">0 orders</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Setup & Recommendations Section -->
+        <section class="combined-section">
+            <div class="section-header">
+                <h2>Just for you</h2>
+                <span class="page-indicator">2 items</span>
+            </div>
+            <div class="cards-scroll">
+                <a href="success-hub.html" class="action-card">
+                    <div class="card-icon">
+                        <div class="progress-circle">
+                            <svg class="circular-chart" viewBox="0 0 36 36">
+                                <circle class="circle-background" cx="18" cy="18" r="16" />
+                                <circle class="circle-progress" cx="18" cy="18" r="16" />
+                            </svg>
+                            <div class="percentage">50%</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Complete your store setup to get your first order</p>
+                        <span class="action-link">See the checklist</span>
+                    </div>
+                    <button class="close-button">
+                        <span class="material-icons">close</span>
+                    </button>
+                </a>
+
+                <div class="action-card">
+                    <div class="card-icon">
+                        <span class="material-icons">cake</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Add photos to your menu items to attract more customers!</p>
+                        <a href="#" class="action-link">Add photos now</a>
+                    </div>
+                    <button class="close-button">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions Grid -->
+        <section class="quick-actions">
+            <div class="actions-grid">
+                <a href="orders.html" class="action-item">
+                    <span class="material-icons">shopping_bag</span>
+                    <span>Orders</span>
+                </a>
+                <a href="#" class="action-item">
+                    <span class="material-icons">menu_book</span>
+                    <span>Menu</span>
+                </a>
+                <a href="#" class="action-item">
+                    <div class="badge">New</div>
+                    <span class="material-icons">payments</span>
+                    <span>Loans</span>
+                </a>
+                <a href="#" class="action-item">
+                    <span class="material-icons">smart_toy</span>
+                    <span>AI Assistant</span>
+                </a>
+                <a href="#" class="action-item">
+                    <div class="badge">New</div>
+                    <span class="material-icons">campaign</span>
+                    <span>Marketing</span>
+                </a>
+                <a href="#" class="action-item">
+                    <span class="material-icons">group</span>
+                    <span>Employees</span>
+                </a>
+                <a href="#" class="action-item">
+                    <span class="material-icons">store</span>
+                    <span>Store</span>
+                </a>
+                <a href="#" class="action-item">
+                    <div class="badge">New</div>
+                    <span class="material-icons">insights</span>
+                    <span>Insights</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <span class="material-icons">home</span>
+                <span>Home</span>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <span class="material-icons">restaurant</span>
+                <span>Orders</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">menu_book</span>
+                <span>Menu</span>
+                <span class="notification-badge">1</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">account_balance_wallet</span>
+                <span>Finance</span>
+                <div class="notification-badge">2</div>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">apps</span>
+                <span>More</span>
+            </a>
+        </nav>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressPath = document.querySelector('.circular-chart .circle-progress');
+            const percentage = 50;
+            
+            if (progressPath) {
+                const radius = 16;
+                const circumference = 2 * Math.PI * radius;
+                const offset = ((100 - percentage) / 100) * circumference;
+                progressPath.style.strokeDasharray = `${circumference} ${circumference}`;
+                progressPath.style.strokeDashoffset = offset;
+            }
+        });
+    </script>
+</body>
+</html> 

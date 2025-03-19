@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Hub - Grab Merchant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <a href="index.html" class="back-button">
+                <span class="material-icons">arrow_back</span>
+            </a>
+            <h1>Merchant Incubation</h1>
+        </header>
+
+        <!-- Progress Tracking Header -->
+        <section class="progress-section">
+            <h2>Success Progress</h2>
+            <div class="progress-content">
+                <div class="progress-circle-container">
+                    <div class="progress-circle">
+                        <svg class="circular-chart" viewBox="0 0 36 36">
+                            <circle class="circle-background" cx="18" cy="18" r="16" />
+                            <circle class="circle-progress" cx="18" cy="18" r="16" />
+                        </svg>
+                        <div class="percentage">50%</div>
+                    </div>
+                </div>
+                <div class="status-info">
+                    <p class="impact-text">Complete 3 more items to help you get your first order</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prioritized Checklist Section -->
+        <section class="checklist-section">
+            <h2>Priority Tasks</h2>
+            <div class="checklist">
+                <div class="task-item">
+                    <input type="checkbox" id="task1">
+                    <label for="task1">
+                        <span class="task-text">Add 5 menu photos</span>
+                        <button class="learn-more-btn" data-modal="photo-tips">
+                            <span class="material-icons">lightbulb</span>
+                            Learn tips
+                        </button>
+                    </label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task2" checked>
+                    <label for="task2">
+                        <span class="task-text">Set accurate business hours</span>
+                        <button class="learn-more-btn" data-modal="hours-tips">
+                            <span class="material-icons">lightbulb</span>
+                            Learn tips
+                        </button>
+                    </label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task3">
+                    <label for="task3">
+                        <span class="task-text">Write menu item descriptions</span>
+                        <button class="learn-more-btn" data-modal="description-tips">
+                            <span class="material-icons">lightbulb</span>
+                            Learn tips
+                        </button>
+                    </label>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" id="task4" checked>
+                    <label for="task4">
+                        <span class="task-text">Add store location on map</span>
+                        <button class="learn-more-btn" data-modal="location-tips">
+                            <span class="material-icons">lightbulb</span>
+                            Learn tips
+                        </button>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Resources Section -->
+        <section class="learning-resources">
+            <div class="learning-resources-header">
+                <h2>Learning Resources</h2>
+            </div>
+
+            <div class="resource-filters">
+                <button class="filter-chip active">All</button>
+                <button class="filter-chip">Store Setup</button>
+                <button class="filter-chip">Menu Management</button>
+                <button class="filter-chip">Order Handling</button>
+                <button class="filter-chip">Marketing</button>
+            </div>
+
+            <div class="learning-category">
+                <div class="category-header">
+                    <span class="material-icons">store</span>
+                    <h3>Store Setup Essentials</h3>
+                </div>
+                <div class="resource-cards">
+                    <a href="https://merchant.grab.com/id-id/guides/all/tips-meningkatkan-penjualan-dari-foto-produk" class="resource-card">
+                        <div class="resource-progress completed">
+                            <span class="material-icons">check</span>
+                        </div>
+                        <div class="resource-type">
+                            <span class="material-icons">play_circle</span>
+                            <span>Video Guide</span>
+                        </div>
+                        <h4 class="resource-title">Perfect Your Store Photos</h4>
+                        <p class="resource-description">Learn professional techniques for capturing appealing photos that attract customers.</p>
+                        <div class="resource-meta">
+                            <div class="resource-duration">
+                                <span class="material-icons">schedule</span>
+                                <span>5 min</span>
+                            </div>
+                            <span class="material-icons">open_in_new</span>
+                        </div>
+                    </a>
+
+                    <a href="https://merchant.grab.com/en-my/blog/3-important-reasons-to-update-your-store-information" class="resource-card">
+                        <div class="resource-progress in-progress">
+                            <span class="material-icons">play_arrow</span>
+                        </div>
+                        <div class="resource-type">
+                            <span class="material-icons">article</span>
+                            <span>Quick Guide</span>
+                        </div>
+                        <h4 class="resource-title">Optimizing Business Hours</h4>
+                        <p class="resource-description">Set up your business hours strategically to maximize order potential.</p>
+                        <div class="resource-meta">
+                            <div class="resource-duration">
+                                <span class="material-icons">schedule</span>
+                                <span>3 min</span>
+                            </div>
+                            <span class="material-icons">open_in_new</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="learning-category">
+                <div class="category-header">
+                    <span class="material-icons">restaurant_menu</span>
+                    <h3>Menu Excellence</h3>
+                </div>
+                <div class="resource-cards">
+                    <div class="resource-card">
+                        <div class="resource-type">
+                            <span class="material-icons">menu_book</span>
+                            <span>Interactive Guide</span>
+                        </div>
+                        <h4 class="resource-title">Crafting Compelling Menu Descriptions</h4>
+                        <p class="resource-description">Write appetizing descriptions that help customers make confident ordering decisions.</p>
+                        <div class="resource-meta">
+                            <div class="resource-duration">
+                                <span class="material-icons">schedule</span>
+                                <span>7 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-type">
+                            <span class="material-icons">tips_and_updates</span>
+                            <span>Best Practices</span>
+                        </div>
+                        <h4 class="resource-title">Menu Pricing Strategies</h4>
+                        <p class="resource-description">Learn effective pricing strategies to maximize your profit while staying competitive.</p>
+                        <div class="resource-meta">
+                            <div class="resource-duration">
+                                <span class="material-icons">schedule</span>
+                                <span>10 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons">home</span>
+                <span>Home</span>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <span class="material-icons">restaurant</span>
+                <span>Orders</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">menu_book</span>
+                <span>Menu</span>
+                <span class="notification-badge">1</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">account_balance_wallet</span>
+                <span>Finance</span>
+                <div class="notification-badge">2</div>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">apps</span>
+                <span>More</span>
+            </a>
+        </nav>
+
+        <!-- Modal -->
+        <div class="modal" id="cardModal">
+            <div class="modal-content">
+                <span class="close-modal material-icons">close</span>
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Educational Content Modals -->
+        <div class="modal" id="photo-tips">
+            <div class="modal-content">
+                <span class="close-modal material-icons">close</span>
+                <h2>Photo Best Practices</h2>
+                <div class="modal-body">
+                    <div class="tip-item">
+                        <span class="material-icons">photo_camera</span>
+                        <div class="tip-content">
+                            <h3>Good Lighting is Key</h3>
+                            <p>Take photos in natural daylight or well-lit conditions to showcase your food's true colors.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-icons">crop</span>
+                        <div class="tip-content">
+                            <h3>Frame Your Shot</h3>
+                            <p>Ensure your dish fills the frame and capture it from the most appetizing angle.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-icons">style</span>
+                        <div class="tip-content">
+                            <h3>Style Your Presentation</h3>
+                            <p>Use clean plates and arrange food neatly before taking the photo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="hours-tips">
+            <div class="modal-content">
+                <span class="close-modal material-icons">close</span>
+                <h2>Business Hours Tips</h2>
+                <div class="modal-body">
+                    <div class="tip-item">
+                        <span class="material-icons">schedule</span>
+                        <div class="tip-content">
+                            <h3>Be Precise</h3>
+                            <p>Set exact opening and closing times for each day of the week.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-icons">event_available</span>
+                        <div class="tip-content">
+                            <h3>Special Hours</h3>
+                            <p>Don't forget to set special hours for holidays or events.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="description-tips">
+            <div class="modal-content">
+                <span class="close-modal material-icons">close</span>
+                <h2>Menu Description Tips</h2>
+                <div class="modal-body">
+                    <div class="tip-item">
+                        <span class="material-icons">restaurant_menu</span>
+                        <div class="tip-content">
+                            <h3>Be Descriptive</h3>
+                            <p>Use appetizing words to describe flavors, textures, and cooking methods.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-icons">info</span>
+                        <div class="tip-content">
+                            <h3>Include Key Details</h3>
+                            <p>Mention main ingredients and any customization options available.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="location-tips">
+            <div class="modal-content">
+                <span class="close-modal material-icons">close</span>
+                <h2>Location Setup Tips</h2>
+                <div class="modal-body">
+                    <div class="tip-item">
+                        <span class="material-icons">pin_drop</span>
+                        <div class="tip-content">
+                            <h3>Precise Location</h3>
+                            <p>Drop the pin exactly at your store's entrance for accurate navigation.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="material-icons">directions</span>
+                        <div class="tip-content">
+                            <h3>Add Landmarks</h3>
+                            <p>Include nearby landmarks or buildings to help customers find you easily.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
