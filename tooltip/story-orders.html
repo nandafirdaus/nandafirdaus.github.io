@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Grab Merchant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .orders-header {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .orders-header h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            margin-left: 16px;
+        }
+
+        .status-selector {
+            margin-left: auto;
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-selector .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00b14f;
+            border-radius: 50%;
+        }
+
+        .tab-navigation {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 64px;
+            z-index: 99;
+        }
+
+        .tab-item {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            color: #757575;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .tab-item.active {
+            color: #00b14f;
+            border-bottom-color: #00b14f;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 32px 16px;
+            color: #757575;
+        }
+
+        .suggestions-container {
+            padding: 16px;
+        }
+
+        .suggestions-title {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .suggestion-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .suggestion-icon {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .suggestion-content {
+            flex: 1;
+        }
+
+        .suggestion-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .suggestion-subtitle {
+            color: #757575;
+            font-size: 0.9rem;
+        }
+
+        .suggestion-card .material-icons {
+            color: #757575;
+        }
+
+        .metrics-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .new-feedback {
+            color: #f44336;
+            font-size: 0.9rem;
+        }
+
+        /* Story Viewer Styles */
+        .story-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            display: none;
+        }
+
+        .story-viewer.active {
+            display: block;
+        }
+
+        .story-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .story-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            gap: 4px;
+            padding: 12px;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            height: 2px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0;
+            background: white;
+            transition: width 0.1s linear;
+        }
+
+        .story-controls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+        }
+
+        .story-control {
+            flex: 1;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .story-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Orders Header -->
+        <header class="orders-header">
+            <a href="index.html">
+                <span class="material-icons">arrow_back</span>
+            </a>
+            <h1>Orders</h1>
+            <div class="status-selector">
+                <span class="status-dot"></span>
+                Normal
+                <span class="material-icons">expand_more</span>
+            </div>
+            <button class="icon-button">
+                <span class="material-icons">more_vert</span>
+            </button>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <a href="#" class="tab-item active">Preparing</a>
+            <a href="#" class="tab-item">Ready</a>
+            <a href="#" class="tab-item">Upcoming</a>
+            <a href="#" class="tab-item">History</a>
+        </nav>
+
+        <!-- Empty State -->
+        <div class="empty-state">
+            <p>No New Orders for Now</p>
+        </div>
+
+        <!-- Suggestions While Waiting -->
+        <div class="suggestions-container">
+            <h2 class="suggestions-title">While waiting for orders...</h2>
+            
+            <div class="suggestion-card">
+                <div class="suggestion-icon">
+                    <span class="material-icons">school</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="suggestion-title">Learn how to manage orders</div>
+                    <div class="suggestion-subtitle">To bring you up to speed</div>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+
+            <div class="suggestion-card">
+                <div class="suggestion-icon">
+                    <span class="material-icons">touch_app</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="suggestion-title">Review item availability</div>
+                    <div class="suggestion-subtitle">To avoid cancellation</div>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+
+            <div class="suggestion-card">
+                <div class="suggestion-icon">
+                    <span class="material-icons">schedule</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="suggestion-title">Consider using Busy mode</div>
+                    <div class="suggestion-subtitle">To manage delivery expectations</div>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+
+            <div class="suggestion-card">
+                <div class="suggestion-icon">
+                    <span class="material-icons">star</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="suggestion-title">Read customer feedback</div>
+                    <div class="suggestion-subtitle new-feedback">2 new feedback</div>
+                </div>
+                <span class="material-icons">chevron_right</span>
+            </div>
+        </div>
+
+        <!-- Operational Metrics -->
+        <div class="metrics-card">
+            <div class="metrics-title">Track your operational metrics</div>
+            <span class="material-icons">chevron_right</span>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="material-icons">home</span>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <span class="material-icons">restaurant</span>
+                <span>Orders</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">menu_book</span>
+                <span>Menu</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">account_balance_wallet</span>
+                <span>Finance</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="material-icons">apps</span>
+                <span>More</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Story Viewer -->
+    <div class="story-viewer">
+        <button class="story-close">
+            <span class="material-icons">close</span>
+        </button>
+        <div class="story-content">
+            <div class="story-progress"></div>
+            <img class="story-image" src="" alt="Story">
+            <div class="story-controls">
+                <button class="story-control" onclick="previousStory()"></button>
+                <button class="story-control" onclick="nextStory()"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click handlers for tabs
+        document.querySelectorAll('.tab-item').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // Story functionality
+        const stories = [
+            'stories/1.png',
+            'stories/2.png',
+            'stories/3.png',
+            'stories/4.png'
+        ];
+        let currentStory = 0;
+        let storyTimeout;
+        const STORY_DURATION = 5000; // 5 seconds per story
+
+        function initStoryProgress() {
+            const progressContainer = document.querySelector('.story-progress');
+            progressContainer.innerHTML = '';
+            stories.forEach(() => {
+                progressContainer.innerHTML += `
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                `;
+            });
+        }
+
+        function updateStoryProgress() {
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            progressBars.forEach((bar, index) => {
+                if (index < currentStory) {
+                    bar.style.width = '100%';
+                } else if (index === currentStory) {
+                    bar.style.width = '0%';
+                    // Animate progress
+                    bar.style.transition = `width ${STORY_DURATION}ms linear`;
+                    setTimeout(() => bar.style.width = '100%', 50);
+                } else {
+                    bar.style.width = '0%';
+                }
+            });
+        }
+
+        function showStory(index) {
+            clearTimeout(storyTimeout);
+            if (index < 0) {
+                index = stories.length - 1;
+            } else if (index >= stories.length) {
+                closeStory();
+                return;
+            }
+            currentStory = index;
+            const storyImage = document.querySelector('.story-image');
+            storyImage.src = stories[currentStory];
+            updateStoryProgress();
+            
+            // Auto advance to next story
+            storyTimeout = setTimeout(() => {
+                nextStory();
+            }, STORY_DURATION);
+        }
+
+        function startStory() {
+            document.querySelector('.story-viewer').classList.add('active');
+            currentStory = 0;
+            initStoryProgress();
+            showStory(currentStory);
+        }
+
+        function closeStory() {
+            document.querySelector('.story-viewer').classList.remove('active');
+            clearTimeout(storyTimeout);
+        }
+
+        function nextStory() {
+            showStory(currentStory + 1);
+        }
+
+        function previousStory() {
+            showStory(currentStory - 1);
+        }
+
+        // Update the suggestion card to trigger story viewer
+        document.querySelector('.suggestion-card').onclick = (e) => {
+            e.preventDefault();
+            startStory();
+        };
+
+        // Close story on close button click
+        document.querySelector('.story-close').onclick = closeStory;
+
+        // Handle keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.querySelector('.story-viewer').classList.contains('active')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                previousStory();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextStory();
+            } else if (e.key === 'Escape') {
+                closeStory();
+            }
+        });
+    </script>
+</body>
+</html> 
